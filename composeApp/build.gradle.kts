@@ -16,7 +16,7 @@ kotlin {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -27,7 +27,7 @@ kotlin {
             isStatic = true
         }
     }
-    
+
     sourceSets {
         androidMain.dependencies {
             implementation(compose.preview)
@@ -60,10 +60,6 @@ android {
         versionCode = 1
         versionName = "1.0"
     }
-    
-    lint {
-        disable.addAll(listOf("NullSafeMutableLiveData"))
-    }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -83,4 +79,3 @@ android {
 dependencies {
     debugImplementation(compose.uiTooling)
 }
-
