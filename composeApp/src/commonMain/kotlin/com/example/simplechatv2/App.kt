@@ -101,6 +101,7 @@ object ChatColors {
     val ReadIndicator = Color(0xFF5AD439)
     val TabIconInactive = Color(0xFF8E8E93)
     val NotificationBadge = Color(0xFF5AD439)
+    val OnlineBadge = Color(0xFF5AD439)
 }
 
 // Mock Data
@@ -442,10 +443,21 @@ fun StoryItem(
                         "avatar_martha.png" -> Res.drawable.avatar_martha
                         else -> Res.drawable.avatar_joshua
                     }
+
+                    // 头像
                     Image(
                         painter = painterResource(avatarResource),
                         contentDescription = "${story.userName}'s avatar",
                         modifier = Modifier.fillMaxSize()
+                    )
+
+                    // 右下角 12 dp 绿色圆点
+                    Box(
+                        modifier = Modifier
+                            .size(12.dp)
+                            .clip(CircleShape)
+                            .background(ChatColors.OnlineBadge)
+                            .align(Alignment.BottomEnd)
                     )
                 } else {
                     Box(
