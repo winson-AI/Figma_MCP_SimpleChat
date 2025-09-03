@@ -87,9 +87,7 @@ data class Story(
 // Theme Colors
 object ChatColors {
     val Background = Color(0xFFFFFFFF)
-    val TopBarBackground = Color(0x99FFFFFF) // 60% opacity white
     val SearchBackground = Color(0x0D000000) // 5% opacity black
-    val TabBarBackground = Color(0x99FFFFFF) // 60% opacity white
     val TabBarLine = Color(0xFFA6A6AA)
 
     val TextPrimary = Color(0xFF000000)
@@ -701,77 +699,68 @@ fun BottomTabBar(
             color = ChatColors.TabBarLine,
             thickness = 1.dp
         )
-
-        Box(
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(86.dp)
-                .background(ChatColors.TabBarBackground)
-                .padding(bottom = 34.dp)
+                .padding(top = 14.dp, bottom = 34.dp),
+            horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 14.dp, bottom = 34.dp),
-                horizontalArrangement = Arrangement.SpaceEvenly
-            ) {
-                TabItem(
-                    isSelected = selectedTab == 0,
-                    onClick = { onTabSelected(0) },
-                    content = {
+            TabItem(
+                isSelected = selectedTab == 0,
+                onClick = { onTabSelected(0) },
+                content = {
+                    Image(
+                        painter = painterResource(Res.drawable.ic_chats),
+                        contentDescription = "Chats",
+                        modifier = Modifier.size(24.dp),
+                        colorFilter = ColorFilter.tint(Color.Black)
+                    )
+                }
+            )
+
+            TabItem(
+                isSelected = selectedTab == 1,
+                onClick = { onTabSelected(1) },
+                content = {
+                    Box {
                         Image(
-                            painter = painterResource(Res.drawable.ic_chats),
-                            contentDescription = "Chats",
+                            painter = painterResource(Res.drawable.ic_people),
+                            contentDescription = "People",
                             modifier = Modifier.size(24.dp),
                             colorFilter = ColorFilter.tint(ChatColors.TabIconInactive)
                         )
-                    }
-                )
 
-                TabItem(
-                    isSelected = selectedTab == 1,
-                    onClick = { onTabSelected(1) },
-                    content = {
-                        Box {
-                            Image(
-                                painter = painterResource(Res.drawable.ic_people),
-                                contentDescription = "People",
-                                modifier = Modifier.size(24.dp),
-                                colorFilter = ColorFilter.tint(ChatColors.TabIconInactive)
+                        Box(
+                            modifier = Modifier
+                                .offset(x = 16.dp, y = (-8).dp)
+                                .size(16.dp)
+                                .background(ChatColors.NotificationBadge.copy(alpha = 0.16f), CircleShape),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                "2",
+                                fontSize = 13.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = ChatColors.NotificationBadge,
+                                letterSpacing = (-0.14).sp
                             )
-
-                            Box(
-                                modifier = Modifier
-                                    .offset(x = 16.dp, y = (-8).dp)
-                                    .size(16.dp)
-                                    .background(ChatColors.NotificationBadge, CircleShape),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                Text(
-                                    "2",
-                                    fontSize = 13.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    color = Color.White,
-                                    letterSpacing = (-0.14).sp
-                                )
-                            }
                         }
                     }
-                )
+                }
+            )
 
-                TabItem(
-                    isSelected = selectedTab == 2,
-                    onClick = { onTabSelected(2) },
-                    content = {
-                        Image(
-                            painter = painterResource(Res.drawable.ic_settings),
-                            contentDescription = "Settings",
-                            modifier = Modifier.size(24.dp),
-                            colorFilter = ColorFilter.tint(ChatColors.TabIconInactive)
-                        )
-                    }
-                )
-            }
+            TabItem(
+                isSelected = selectedTab == 2,
+                onClick = { onTabSelected(2) },
+                content = {
+                    Image(
+                        painter = painterResource(Res.drawable.ic_settings),
+                        contentDescription = "Settings",
+                        modifier = Modifier.size(24.dp),
+                        colorFilter = ColorFilter.tint(ChatColors.TabIconInactive)
+                    )
+                }
+            )
         }
     }
 }
