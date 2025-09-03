@@ -2,6 +2,7 @@ package com.example.simplechatv2
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -414,8 +415,7 @@ fun StoryItem(
     ) {
         Box(
             modifier = Modifier
-                .size(52.dp)
-                .clip(CircleShape),
+                .size(52.dp),
             contentAlignment = Alignment.Center
         ) {
             if (story.isYourStory) {
@@ -569,12 +569,24 @@ fun ChatItem(
         }
 
         if (chat.isRead && chat.id != "6") {
-            Image(
-                painter = painterResource(Res.drawable.ic_read_indicator),
-                contentDescription = "Read",
-                modifier = Modifier.size(16.dp),
-                colorFilter = ColorFilter.tint(ChatColors.ReadIndicator)
-            )
+            Box(
+                modifier = Modifier
+                    .size(18.dp)                                    // 比图标大一圈
+                    .clip(CircleShape)                              // 圆形裁剪
+                    .border(
+                        width = 1.5.dp,                             // 圆环厚度
+                        color = ChatColors.TabIconInactive,         // 同颜色
+                        shape = CircleShape
+                    ),
+                contentAlignment = Alignment.Center
+            ) {
+                Image(
+                    painter = painterResource(Res.drawable.ic_read_indicator),
+                    contentDescription = "Read",
+                    modifier = Modifier.size(16.dp),
+                    colorFilter = ColorFilter.tint(ChatColors.TabIconInactive)
+                )
+            }
         }
     }
 }
